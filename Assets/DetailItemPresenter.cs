@@ -64,6 +64,8 @@ namespace Core.UI
         private void OnFuseButtonClick()
         {
             _fusePresenterFactory.Create(_item);
+
+            OnCloseButtonClick();
         }
 
         private void Clear()

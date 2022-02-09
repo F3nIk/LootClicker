@@ -27,8 +27,8 @@ namespace Core.UI
         {
             _image.sprite = item.Icon;
             _nameText.text = item.Name;
-            _levelText.text = item.Level + "/" + item.MaxLevel;
-            _rateText.text = item.RewardRate.ToString();
+            _levelText.text = "Level \n" + item.Level + "/" + item.MaxLevel;
+            _rateText.text = "x" + item.RewardRate.ToString();
 
             _equipButton.interactable = !equiped;
             _equipButton.onClick.AddListener(OnEquipButtonClick);

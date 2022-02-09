@@ -5,7 +5,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-using Zenject;
 
 namespace Core.InventorySystem
 {
@@ -19,8 +18,10 @@ namespace Core.InventorySystem
         private LootItemDataFactory _lootItemDataFactory;
         private InventorySaveableData _inventorySaveableData;
 
+        private MonoBehaviourMessages _monoBehaviourMessages;
         private ISaver _saver;
 
+        public event Action InventoryChanged;
         public event Action<LootItemData> EquipItemChanged;
 
 
@@ -29,25 +30,17 @@ namespace Core.InventorySystem
         public LootItemData EquipedItem => _equipedItem;
         public object SaveableObject => _inventorySaveableData;
 
-
-        /*[Inject]
-        public void Construct(LootItemDataFactory lootItemDataFactory, ISaver saver)
+        public Inventory(MonoBehaviourMessages monoBehaviourMessages, LootItemDataFactory lootItemDataFactory, ISaver saver)
         {
+            _monoBehaviourMessages = monoBehaviourMessages;
             _lootItemDataFactory = lootItemDataFactory;
             _saver = saver;
 
             Init();
-        }*/
-
-        public Inventory(LootItemDataFactory lootItemDataFactory, ISaver saver)
-        {
-            _lootItemDataFactory = lootItemDataFactory;
-            _saver = saver;
-
-            Init();
+            SubscribeToMonoMessages();
         }
 
-        public void Init()
+        private void Init()
         {
             _cashHandler = new CashHandler();
             _items = new List<LootItemData>();
@@ -58,11 +51,6 @@ namespace Core.InventorySystem
             if (_saver.Exists(this))
             {
                 _saver.LoadOverwrite(this);
-
-                /*foreach (var id in _inventorySaveableData.container)
-                {
-                   _items.Add(_lootItemDataFactory.LoadFromDataBundle(id));
-                }*/
 
                 foreach (var itemWrapper in _inventorySaveableData.container)
                 {
@@ -86,20 +74,18 @@ namespace Core.InventorySystem
             _saver.Save(this);
         }
 
-        private void OnApplicationQuit()
-        {
-            Save();
-        }
-
-
         public void AddItem(LootItemData item)
         {
             _items.Add(item);
+
+            InventoryChanged?.Invoke();
         }
         
         public void RemoveItem(LootItemData item)
         {
             if (_items.Contains(item)) _items.Remove(item);
+
+            InventoryChanged?.Invoke();
         }
 
         public void EquipItem(LootItemData item)
@@ -113,6 +99,23 @@ namespace Core.InventorySystem
         public string GetFileName()
         {
             return Application.persistentDataPath + "/Inventory.rja";
+        }
+
+        private void SubscribeToMonoMessages()
+        {
+            _monoBehaviourMessages.ApplicationQuited += OnApplicationQuit;
+        }
+
+        private void UnsubscribeToMonoMessages()
+        {
+            _monoBehaviourMessages.ApplicationQuited -= OnApplicationQuit;
+        }
+
+        private void OnApplicationQuit()
+        {
+            Save();
+
+            UnsubscribeToMonoMessages();
         }
     }
 

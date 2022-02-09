@@ -15,6 +15,7 @@ public class Installer : MonoInstaller
     [SerializeField] private CashRewardDataBundle _cashRewardDataBundle;
     [SerializeField] private LootBoxDataBundle _lootBoxDataBundle;
     [SerializeField] private DetailItemPresenter _detailItemPresenter;
+    [SerializeField] private MonoBehaviourMessages _monoBehaviourMessages;
 
     [Space(20f)]
     [Header("Factories")]
@@ -23,6 +24,8 @@ public class Installer : MonoInstaller
 
     public override void InstallBindings()
     {
+        Container.Bind<MonoBehaviourMessages>().FromInstance(_monoBehaviourMessages).AsSingle();
+
         InstallInput();
         InstallNonMonoBehaviours();
         InstallInstances();

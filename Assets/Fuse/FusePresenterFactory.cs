@@ -26,8 +26,9 @@ namespace Core.UI
         public FusePresenter Create(LootItemData targetItem)
         {
             var presenter = Instantiate(_fusePresenterPrefab, _parent);
-            presenter.SetTargetItem(_inventory, _fuse, targetItem);
-
+            //presenter.SetTargetItem(_inventory, _fuse, targetItem);
+            _fuse.SetTargetItem(targetItem);
+            presenter.Init(_inventory, _fuse);
             return presenter;
         }
     }

@@ -24,7 +24,7 @@ namespace Core.UI
 
         public void OnPointerDown(PointerEventData eventData)
         {
-            _fusePresenter.AddItem(_item);
+            //_fusePresenter.AddItem(_item);
         }
     }
 
