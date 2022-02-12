@@ -24,19 +24,24 @@ namespace Core.UI
         private void OnEnable()
         {
             _openCloseButton.ValueChanged += OnButtonClick;
-            _inventory.InventoryChanged += OnButtonClick;
+            _inventory.InventoryChanged += OnInventoryChanged;
         }
 
         private void OnDisable()
         {
             _openCloseButton.ValueChanged -= OnButtonClick;
-            _inventory.InventoryChanged -= OnButtonClick;
+            _inventory.InventoryChanged -= OnInventoryChanged;
         }
 
         private void OnButtonClick()
         {
             if (_inventoryView.Showed) _inventoryView.Hide();
             else _inventoryView.ShowInventory();
+        }
+
+        private void OnInventoryChanged()
+        {
+            if (_inventoryView.Showed) _inventoryView.Hide();
         }
 
     }

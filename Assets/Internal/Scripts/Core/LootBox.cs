@@ -2,8 +2,6 @@ using Core.InventorySystem;
 using Core.IO;
 using Core.ItemSystem;
 
-using System;
-
 using UnityEngine;
 
 namespace Core

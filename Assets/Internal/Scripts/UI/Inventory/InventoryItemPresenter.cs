@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace Core.UI
 {
 
-    public sealed class InventoryItemPresenter : MonoBehaviour, IPointerDownHandler
+    public sealed class InventoryItemPresenter : MonoBehaviour, IPointerClickHandler
     {
         [SerializeField] private InventoryItemView _inventoryItemView;
 
@@ -43,7 +43,7 @@ namespace Core.UI
             _inventory.EquipItemChanged -= OnEquipItemChanged;
         }
 
-        public void OnPointerDown(PointerEventData eventData)
+        public void OnPointerClick(PointerEventData eventData)
         {
             _detailItemPresenter.ShowItemDetail(_item);
         }

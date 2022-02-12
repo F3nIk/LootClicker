@@ -11,9 +11,10 @@ namespace Core.CashRewardSystem
         private float _expiredTime;
         private const float _frequency = 1f;
 
-        public AutoCashRewarder(CashRewardDataBundle dataBundle, Inventory inventory) :
-            base(dataBundle, inventory.CashHandler)
+        public AutoCashRewarder(CashRewardDataBundle cashRewardDataBundle, Inventory inventory) :
+            base(inventory.CashHandler)
         {
+            _reward = cashRewardDataBundle.Reward;
             _expiredTime = 0;
         }
 
@@ -22,10 +23,15 @@ namespace Core.CashRewardSystem
             if (_expiredTime >= _frequency)
             {
                 _expiredTime = 0;
-                _cashHandler.Add(_dataBundle.Reward);
+                _cashHandler.Add(_reward);
             }
 
             _expiredTime += Time.deltaTime;
+        }
+
+        public void ChangeReward(float value)
+        {
+            _reward = value;
         }
     }
 }

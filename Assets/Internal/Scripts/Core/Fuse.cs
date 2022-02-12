@@ -23,8 +23,7 @@ namespace Core
         public void FuseItem()
         {
             _inventory.RemoveItem(_consumedItem);
-
-            _targetItem.IncreaseLevel();
+            _inventory.IncreaseLevelToItem(_targetItem);
 
             _consumedItem = null;
             _targetItem = null;

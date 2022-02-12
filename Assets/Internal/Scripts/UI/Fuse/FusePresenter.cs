@@ -1,5 +1,3 @@
-
-using Core.InventorySystem;
 using Core.ItemSystem;
 
 using System.Collections;
@@ -11,13 +9,12 @@ using UnityEngine.UI;
 namespace Core.UI
 {
 
-    public class FusePresenter : MonoBehaviour
+    public sealed class FusePresenter : MonoBehaviour
     {
         [SerializeField] private FuseView _fuseView;
         [SerializeField] private Button _closeButton;
         [SerializeField] private Button _fuseButton;
 
-        private Inventory _inventory;
         private Fuse _fuse;
 
 
@@ -33,9 +30,8 @@ namespace Core.UI
             _fuseButton.onClick.RemoveListener(OnFuseButtonClick);
         }
 
-        public void Init(Inventory inventory, Fuse fuse)
+        public void Init(Fuse fuse)
         {
-            _inventory = inventory;
             _fuse = fuse;
 
 

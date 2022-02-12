@@ -8,9 +8,10 @@ namespace Core.CashRewardSystem
     {
         private IInput _input;
 
-        public ManualCashRewarder(CashRewardDataBundle dataBundle, Inventory inventory, IInput input):
-            base(dataBundle, inventory.CashHandler)
+        public ManualCashRewarder(CashRewardDataBundle cashRewardDataBundle, Inventory inventory, IInput input):
+            base(inventory.CashHandler)
         {
+            _reward = cashRewardDataBundle.RewardPerTap;
             _input = input;
         }
 
@@ -26,7 +27,12 @@ namespace Core.CashRewardSystem
 
         private void OnClick()
         {
-            _cashHandler.Add(_dataBundle.RewardPerTap);
+            _cashHandler.Add(_reward);
+        }
+
+        public void ChangeReward(float value)
+        {
+            _reward = value;
         }
     }
 

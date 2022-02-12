@@ -220,7 +220,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -304,53 +304,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1975780196}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &106399219
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 106399220}
-  - component: {fileID: 106399221}
-  m_Layer: 0
-  m_Name: FuseInventoryItemFactory
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &106399220
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106399219}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1975780196}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &106399221
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 106399219}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 485d21d4fe9d0a246bf324e4588df087, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fuseInventoryItemPresenter: {fileID: 2758079287736185515, guid: 28d0dd4cbb9e7234288f444117f42c5c, type: 3}
-  _parent: {fileID: 488825075}
 --- !u!1 &108446100
 GameObject:
   m_ObjectHideFlags: 0
@@ -674,7 +629,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &492423669
 MonoBehaviour:
@@ -716,7 +671,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &587315473
 GameObject:
@@ -780,7 +735,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &587315476
 MonoBehaviour:
@@ -794,11 +749,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d12314b24951474098e994e5e4ec8bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cashRewardSystemFacadePrefab: {fileID: 2054411112}
-  _cashRewardDataBundle: {fileID: 11400000, guid: 287832c41153b644abb55be1e44a6cf5, type: 2}
-  _lootBoxDataBundle: {fileID: 11400000, guid: 9754c0561cd2c2a46a5267a1dffafe7a, type: 2}
+  _cashRewardSystemFacade: {fileID: 2054411112}
   _detailItemPresenter: {fileID: 624024094}
   _monoBehaviourMessages: {fileID: 492423669}
+  _lootBoxDataBundle: {fileID: 11400000, guid: 9754c0561cd2c2a46a5267a1dffafe7a, type: 2}
+  _cashRewardDataBundle: {fileID: 11400000, guid: 287832c41153b644abb55be1e44a6cf5, type: 2}
   _fusePresenterFactory: {fileID: 868423342}
   _inventoryItemPresenterFactory: {fileID: 63543421}
 --- !u!1 &624024089
@@ -2115,7 +2070,6 @@ Transform:
   - {fileID: 478322762}
   - {fileID: 10428424}
   - {fileID: 868423341}
-  - {fileID: 106399220}
   - {fileID: 63543422}
   m_Father: {fileID: 0}
   m_RootOrder: 11

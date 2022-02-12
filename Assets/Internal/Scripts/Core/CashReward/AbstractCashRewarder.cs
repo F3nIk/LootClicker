@@ -3,12 +3,11 @@ namespace Core.CashRewardSystem
 
     public abstract class AbstractCashRewarder
     {
-        protected CashRewardDataBundle _dataBundle;
+        protected float _reward;
         protected CashHandler _cashHandler;
 
-        public AbstractCashRewarder(CashRewardDataBundle dataBundle, CashHandler cashHandler)
+        public AbstractCashRewarder(CashHandler cashHandler)
         {
-            _dataBundle = dataBundle;
             _cashHandler = cashHandler;
         }
     }

@@ -14,6 +14,8 @@ namespace Core.UI
         public void Init(CashRewardFacade cashRewardFacade)
         {
             _cashRewardFacade = cashRewardFacade;
+
+            OnRewardRateChanged(_cashRewardFacade.RewardRate);
         }
 
         private void OnEnable()

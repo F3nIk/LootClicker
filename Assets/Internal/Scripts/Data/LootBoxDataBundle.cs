@@ -18,8 +18,29 @@ namespace Core.ItemSystem
         
         public LootItemData GetLoot()
         {
-            var random = _data.ToList()[Random.Range(0, _data.Length - 1)];
-            return new LootItemData(random);
+            /* var random = _data.ToList()[Random.Range(0, _data.Length - 1)];
+             return new LootItemData(random);*/
+
+
+            List<int> itemIds = new List<int>(10000);
+
+            foreach (var item in _data)
+            {
+                for (int count = 0; count < item.LootRate * itemIds.Capacity; count++)
+                {
+                    itemIds.Add(item.Id);
+                }
+            }
+
+            int random = Random.Range(0, itemIds.Count + 1);
+            int randomItemId = itemIds.ElementAt(random);
+
+            LootItemData itemBundle = _data.First(item => item.Id == randomItemId);
+
+            return new LootItemData(itemBundle, 1);
+            
+
+
         }
     }
 }

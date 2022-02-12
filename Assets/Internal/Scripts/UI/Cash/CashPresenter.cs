@@ -12,6 +12,7 @@ namespace Core.UI
         public void Init(CashHandler cashHandler)
         {
             _cashHandler = cashHandler;
+            _cashView.ChangeValue(_cashHandler.Cash);
         }
 
         private void OnEnable()

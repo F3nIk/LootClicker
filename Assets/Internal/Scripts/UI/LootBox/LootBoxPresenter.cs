@@ -30,15 +30,18 @@ namespace Core.UI
         private void OnEnable()
         {
             _lootBox.Load();
+            _lootBoxPriceView.ChangeValue(_lootBox.GetCurrentPrice());
 
             _button.onClick.AddListener(PlayLootBoxOpenAnimation);
-
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(PlayLootBoxOpenAnimation);
+        }
 
+        private void OnApplicationQuit()
+        {
             _lootBox.Save();
         }
 

@@ -10,35 +10,39 @@ using Zenject;
 
 public class Installer : MonoInstaller
 {
-    [SerializeField] private Inventory _inventoryPrefab;
-    [SerializeField] private CashRewardFacade _cashRewardSystemFacadePrefab;
-    [SerializeField] private CashRewardDataBundle _cashRewardDataBundle;
-    [SerializeField] private LootBoxDataBundle _lootBoxDataBundle;
+    [Header("Instances")]
+    [SerializeField] private CashRewardFacade _cashRewardSystemFacade;
     [SerializeField] private DetailItemPresenter _detailItemPresenter;
     [SerializeField] private MonoBehaviourMessages _monoBehaviourMessages;
 
-    [Space(20f)]
+    [Space(10f)]
+    [Header("Scriptables")]
+    [SerializeField] private LootBoxDataBundle _lootBoxDataBundle;
+    [SerializeField] private CashRewardDataBundle _cashRewardDataBundle;
+
+    [Space(10f)]
     [Header("Factories")]
     [SerializeField] private FusePresenterFactory _fusePresenterFactory;
     [SerializeField] private InventoryItemPresenterFactory _inventoryItemPresenterFactory;
 
     public override void InstallBindings()
     {
-        Container.Bind<MonoBehaviourMessages>().FromInstance(_monoBehaviourMessages).AsSingle();
-
+        InstallMonoOptimization();
+        InstallDataManagment();
         InstallInput();
+        InstallScriptables();
         InstallNonMonoBehaviours();
         InstallInstances();
-        InstallDataManagment();
-        InstallCores();
-        InstallUI();
-        InstallFactories();
     }
 
-    private void InstallInstances()
+    private void InstallMonoOptimization()
     {
-        //Container.Bind<Inventory>().FromInstance(_inventoryPrefab).AsSingle();
-        Container.Bind<CashRewardFacade>().FromInstance(_cashRewardSystemFacadePrefab).AsSingle();
+        Container.Bind<MonoBehaviourMessages>().FromInstance(_monoBehaviourMessages).AsSingle();
+    }
+
+    private void InstallDataManagment()
+    {
+        Container.BindInterfacesAndSelfTo<JsonSaver>().FromNew().AsSingle();
     }
 
     private void InstallInput()
@@ -57,35 +61,32 @@ public class Installer : MonoInstaller
         }
     }
 
+    private void InstallScriptables()
+    {
+        Container.BindInstance(_cashRewardDataBundle).AsSingle();
+        Container.BindInstance(_lootBoxDataBundle).AsSingle();
+    }
+
     private void InstallNonMonoBehaviours()
     {
-        Container.BindInstance(_cashRewardDataBundle);
-        Container.BindInstance(_lootBoxDataBundle);
+        Container.Bind<LootItemDataFactory>().FromNew().AsSingle();
+        Container.Bind<Inventory>().FromNew().AsSingle();
+
         Container.BindInterfacesAndSelfTo<ManualCashRewarder>().AsSingle();
         Container.BindInterfacesAndSelfTo<AutoCashRewarder>().AsSingle();
 
-        Container.Bind<Inventory>().FromNew().AsSingle();
-        Container.Bind<LootItemDataFactory>().FromNew().AsSingle();
+        Container.Bind<LootBox>().FromNew().AsSingle();
         Container.Bind<Fuse>().FromNew().AsSingle();
     }
 
-    private void InstallDataManagment()
+    private void InstallInstances()
     {
-        Container.BindInterfacesAndSelfTo<JsonSaver>().FromNew().AsSingle();
-    }
-
-    private void InstallCores()
-    {
-        Container.Bind<LootBox>().FromNew().AsSingle();
-    }
-
-    private void InstallUI()
-    {
+        Container.Bind<CashRewardFacade>().FromInstance(_cashRewardSystemFacade).AsSingle();
+        Container.Bind<FusePresenterFactory>().FromInstance(_fusePresenterFactory).AsSingle();
         Container.Bind<DetailItemPresenter>().FromInstance(_detailItemPresenter).AsSingle();
     }
 
-    private void InstallFactories()
-    {
-        Container.Bind<FusePresenterFactory>().FromInstance(_fusePresenterFactory).AsSingle();
-    }
+
+
+
 }

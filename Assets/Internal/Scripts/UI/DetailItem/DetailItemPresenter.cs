@@ -1,6 +1,5 @@
 using Core.InventorySystem;
 using Core.ItemSystem;
-using Core.UI;
 
 using UnityEngine;
 

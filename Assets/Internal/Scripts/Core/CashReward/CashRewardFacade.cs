@@ -22,9 +22,12 @@ namespace Core.CashRewardSystem
         private ISaver _saver;
         private CashRewardSaveableData _cashRewardSaveableData;
 
+
         public event Action<float> RewardRateChanged;
 
         public object SaveableObject => _cashRewardSaveableData;
+
+        public float RewardRate => _cashRewardSaveableData.Reward;
 
         [Inject]
         public void Construct(
@@ -40,12 +43,11 @@ namespace Core.CashRewardSystem
             _autoCashRewarder = autoCashRewarder;
             _manualCashRewarder = manualCashRewarder;
             _saver = saver;
+
+            Load();
+
         }
 
-        private void Awake()
-        {
-            Load();
-        }
 
         private void OnEnable()
         {
@@ -72,7 +74,12 @@ namespace Core.CashRewardSystem
         private  void ChangeRewardRateValue(float rate)
         {
             _cashRewardSaveableData.rewardRate = rate;
-            RewardRateChanged?.Invoke(rate);
+            _cashRewardSaveableData.tapRewardRate *= rate;
+
+            _autoCashRewarder.ChangeReward(_cashRewardSaveableData.Reward);
+            _manualCashRewarder.ChangeReward(_cashRewardSaveableData.RewardPerTap);
+
+            RewardRateChanged?.Invoke(_cashRewardSaveableData.Reward);
         }
 
         private void Load()
@@ -80,6 +87,9 @@ namespace Core.CashRewardSystem
             _cashRewardSaveableData = new CashRewardSaveableData(_cashRewardDataBundle);
 
             if (_saver.Exists(this)) _saver.LoadOverwrite(this);
+
+            _autoCashRewarder.ChangeReward(_cashRewardSaveableData.Reward);
+            _manualCashRewarder.ChangeReward(_cashRewardSaveableData.RewardPerTap);
         }
 
         private void Save()

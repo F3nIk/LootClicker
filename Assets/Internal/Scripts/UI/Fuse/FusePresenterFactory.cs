@@ -1,4 +1,3 @@
-using Core.InventorySystem;
 using Core.ItemSystem;
 
 using UnityEngine;
@@ -13,22 +12,20 @@ namespace Core.UI
         [SerializeField] private FusePresenter _fusePresenterPrefab;
         [SerializeField] private Transform _parent;
 
-        private Inventory _inventory;
         private Fuse _fuse;
 
         [Inject]
-        public void Construct(Inventory inventory, Fuse fuse)
+        public void Construct(Fuse fuse)
         {
-            _inventory = inventory;
             _fuse = fuse;
         }
 
         public FusePresenter Create(LootItemData targetItem)
         {
             var presenter = Instantiate(_fusePresenterPrefab, _parent);
-            //presenter.SetTargetItem(_inventory, _fuse, targetItem);
+
             _fuse.SetTargetItem(targetItem);
-            presenter.Init(_inventory, _fuse);
+            presenter.Init(_fuse);
             return presenter;
         }
     }

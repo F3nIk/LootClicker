@@ -101,6 +101,14 @@ namespace Core.InventorySystem
             return Application.persistentDataPath + "/Inventory.rja";
         }
 
+        public void IncreaseLevelToItem(LootItemData item)
+        {
+            item.IncreaseLevel();
+            InventoryChanged?.Invoke();
+
+            if (EquipedItem == item) EquipItemChanged?.Invoke(EquipedItem);
+        }
+
         private void SubscribeToMonoMessages()
         {
             _monoBehaviourMessages.ApplicationQuited += OnApplicationQuit;

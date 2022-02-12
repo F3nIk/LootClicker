@@ -24,42 +24,42 @@ MonoBehaviour:
   - _id: 1
     _name: Orange gem
     _sprite: {fileID: 21300000, guid: 66a42e69bacd1474882607ab0685b4b9, type: 3}
-    _rewardRate: 1.2
+    _rewardRate: 2.1
     _lootRate: 0.25
     _maxLevel: 4
   - _id: 2
     _name: Blue gem
     _sprite: {fileID: 21300000, guid: 2cc42ba925fd5421fa0bae958962b79b, type: 3}
-    _rewardRate: 1.4
+    _rewardRate: 4.1
     _lootRate: 0.15
     _maxLevel: 6
   - _id: 3
     _name: Yellow gem
     _sprite: {fileID: 21300000, guid: 1f4e0442942964fb5a4b3094cf0b9435, type: 3}
-    _rewardRate: 1.8
+    _rewardRate: 6.1
     _lootRate: 0.06
     _maxLevel: 8
   - _id: 4
     _name: Green gem
     _sprite: {fileID: 21300000, guid: 331dbb453bae54f3793427425fe65c6e, type: 3}
-    _rewardRate: 2.6
+    _rewardRate: 8.1
     _lootRate: 0.02
     _maxLevel: 10
   - _id: 5
     _name: Purple gem
     _sprite: {fileID: 21300000, guid: 43589878d1ee64d3db324412ad4b8df4, type: 3}
-    _rewardRate: 5.2
+    _rewardRate: 10.1
     _lootRate: 0.01
     _maxLevel: 15
   - _id: 6
     _name: Pink gem
     _sprite: {fileID: 21300000, guid: 42199df5ac5654c8da31ff2367f9b163, type: 3}
-    _rewardRate: 10.4
+    _rewardRate: 20.1
     _lootRate: 0.001
     _maxLevel: 30
   - _id: 7
     _name: Red gem
     _sprite: {fileID: 21300000, guid: cf14558b4e18843d3a2df64c787d8286, type: 3}
-    _rewardRate: 20.8
+    _rewardRate: 50.1
     _lootRate: 0.0001
     _maxLevel: 60

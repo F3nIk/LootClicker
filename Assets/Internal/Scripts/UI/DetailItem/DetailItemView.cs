@@ -32,6 +32,8 @@ namespace Core.UI
 
             _equipButton.interactable = !equiped;
             _equipButton.onClick.AddListener(OnEquipButtonClick);
+
+            _fuseButton.interactable = item.Level < item.MaxLevel;
         }
 
         private void OnEquipButtonClick()
